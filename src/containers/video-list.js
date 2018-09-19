@@ -1,20 +1,26 @@
 import React from "react";
 import VideoListItem from "../components/video-list-item";
 
-const VideoList = ({ movieList }) => {
-  console.log("----------");
-  console.log("", movieList);
-  console.log("----------");
-
-  const movies = ["film1", "film2", "film3", "film4", "film5"];
+const VideoList = props => {
+  const { movieList } = props;
   return (
     <div>
       <ul>
-        {movies.map(movie => {
-          return <VideoListItem key={movie} movie={movie} />;
+        {movieList.map(movie => {
+          return (
+            <VideoListItem
+              key={movie.id}
+              movie={movie}
+              callback={receiveCallback}
+            />
+          );
         })}
       </ul>
     </div>
   );
+
+  function receiveCallback(movie) {
+    props.callback(movie);
+  }
 };
 export default VideoList;
